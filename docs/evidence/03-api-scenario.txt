@@ -1,0 +1,44 @@
+
+=== 1. Health-check всех сервисов
+$ curl -s http://localhost:5001/health; echo; curl -s http://localhost:5002/health; echo; curl -s http://localhost:5003/health
+{"status":"ok","service":"catalog-service"}
+{"status":"ok","service":"order-service"}
+{"status":"ok","service":"payment-service"}
+
+=== 2. Каталог товаров (catalog-service)
+$ curl -s http://localhost:5001/api/products
+[{"id":1,"name":"Ноутбук Aero 14","price":89990.00,"stock":5},{"id":2,"name":"Смартфон Nova X","price":39990.00,"stock":10},{"id":3,"name":"Наушники Pulse","price":7490.00,"stock":25},{"id":4,"name":"Монитор View 27","price":24990.00,"stock":7}]
+
+=== 3. Добавить новый товар
+$ curl -s -X POST http://localhost:5001/api/products -H 'Content-Type: application/json' -d '{"name":"Клавиатура Type One","price":4990,"stock":15}'
+{"id":5,"name":"Клавиатура Type One","price":4990,"stock":15}
+
+=== 4. Оформить заказ: order-service -> catalog-service (резерв) -> payment-service (оплата)
+$ curl -s -X POST http://localhost:5002/api/orders -H 'Content-Type: application/json' -d '{"customerName":"Иван Петров","items":[{"productId":2,"quantity":1},{"productId":3,"quantity":2}]}'
+{"id":1,"customerName":"Иван Петров","status":"Paid","total":54970.00,"paymentId":1,"comment":null,"createdAt":"2026-11-10T13:09:18.7856831Z","items":[{"id":1,"orderId":1,"productId":2,"productName":"Смартфон Nova X","unitPrice":39990.00,"quantity":1},{"id":2,"orderId":1,"productId":3,"productName":"Наушники Pulse","unitPrice":7490.00,"quantity":2}]}
+
+=== 5. Остатки уменьшились (товар зарезервирован)
+$ curl -s http://localhost:5001/api/products/2; echo; curl -s http://localhost:5001/api/products/3
+{"id":2,"name":"Смартфон Nova X","price":39990.00,"stock":9}
+{"id":3,"name":"Наушники Pulse","price":7490.00,"stock":23}
+
+=== 6. Платёж создан в payment-service
+$ curl -s 'http://localhost:5003/api/payments?orderId=1'
+[{"id":1,"orderId":1,"amount":54970.00,"status":"Approved","reason":null,"createdAt":"2026-11-10T13:09:18.899782Z"}]
+
+=== 7. Заказ дороже лимита 100000 -> оплата отклонена, товар возвращается на склад
+$ curl -s -X POST http://localhost:5002/api/orders -H 'Content-Type: application/json' -d '{"customerName":"Анна Смирнова","items":[{"productId":1,"quantity":2}]}'
+{"id":2,"customerName":"Анна Смирнова","status":"PaymentFailed","total":179980.00,"paymentId":2,"comment":"Amount exceeds limit 100000","createdAt":"2026-11-10T13:09:19.1256421Z","items":[{"id":3,"orderId":2,"productId":1,"productName":"Ноутбук Aero 14","unitPrice":89990.00,"quantity":2}]}
+
+=== 8. Остаток ноутбука не изменился (компенсация сработала)
+$ curl -s http://localhost:5001/api/products/1
+{"id":1,"name":"Ноутбук Aero 14","price":89990.00,"stock":5}
+
+=== 9. Заказ больше, чем есть на складе -> 422 Rejected
+$ curl -s -w '\nHTTP %{http_code}' -X POST http://localhost:5002/api/orders -H 'Content-Type: application/json' -d '{"customerName":"Олег","items":[{"productId":4,"quantity":100}]}'
+{"id":3,"customerName":"Олег","status":"Rejected","total":0,"paymentId":null,"comment":"Not enough stock for product 4: available 7, requested 100","createdAt":"2026-11-10T13:09:19.1707705Z","items":[]}
+HTTP 422
+
+=== 10. Все заказы
+$ curl -s http://localhost:5002/api/orders
+[{"id":1,"customerName":"Иван Петров","status":"Paid","total":54970.00,"paymentId":1,"comment":null,"createdAt":"2026-11-10T13:09:18.785683Z","items":[{"id":1,"orderId":1,"productId":2,"productName":"Смартфон Nova X","unitPrice":39990.00,"quantity":1},{"id":2,"orderId":1,"productId":3,"productName":"Наушники Pulse","unitPrice":7490.00,"quantity":2}]},{"id":2,"customerName":"Анна Смирнова","status":"PaymentFailed","total":179980.00,"paymentId":2,"comment":"Amount exceeds limit 100000","createdAt":"2026-11-10T13:09:19.125642Z","items":[{"id":3,"orderId":2,"productId":1,"productName":"Ноутбук Aero 14","unitPrice":89990.00,"quantity":2}]},{"id":3,"customerName":"Олег","status":"Rejected","total":0.00,"paymentId":null,"comment":"Not enough stock for product 4: available 7, requested 100","createdAt":"2026-11-10T13:09:19.17077Z","items":[]}]

@@ -1,0 +1,6 @@
+$ docker compose ps
+NAME              IMAGE                  COMMAND                  SERVICE           CREATED          STATUS                    PORTS
+catalog-service   shop-catalog-service   "dotnet CatalogServi…"   catalog-service   21 seconds ago   Up 15 seconds             0.0.0.0:5001->8080/tcp, [::]:5001->8080/tcp
+order-service     shop-order-service     "dotnet OrderService…"   order-service     21 seconds ago   Up 15 seconds             0.0.0.0:5002->8080/tcp, [::]:5002->8080/tcp
+payment-service   shop-payment-service   "dotnet PaymentServi…"   payment-service   21 seconds ago   Up 15 seconds             0.0.0.0:5003->8080/tcp, [::]:5003->8080/tcp
+shop-db           postgres:16            "docker-entrypoint.s…"   db                21 seconds ago   Up 21 seconds (healthy)   0.0.0.0:5434->5432/tcp, [::]:5434->5432/tcp

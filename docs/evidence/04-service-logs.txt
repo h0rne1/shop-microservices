@@ -1,0 +1,9 @@
+$ docker compose logs order-service catalog-service payment-service (фрагмент)
+info: OrderService.Services.OrderProcessor[0]
+      Order 1 -> Paid, total 54970.00
+--
+info: OrderService.Services.OrderProcessor[0]
+      Order 2 -> PaymentFailed, total 179980.00
+--
+info: OrderService.Services.OrderProcessor[0]
+      Order 3 rejected: Not enough stock for product 4: available 7, requested 100

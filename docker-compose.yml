@@ -1,0 +1,82 @@
+name: shop
+
+services:
+  db:
+    image: postgres:16
+    container_name: shop-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-shop}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-shop_password}
+      POSTGRES_DB: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5434:5432"   # на хосте 5434, чтобы не конфликтовать с другими PostgreSQL
+    networks:
+      - shop-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  catalog-service:
+    build: ./services/catalog-service
+    container_name: catalog-service
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__CatalogDb: Host=db;Port=5432;Database=catalog_db;Username=${POSTGRES_USER:-shop};Password=${POSTGRES_PASSWORD:-shop_password}
+    ports:
+      - "5001:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - shop-net
+
+  payment-service:
+    build: ./services/payment-service
+    container_name: payment-service
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__PaymentDb: Host=db;Port=5432;Database=payments_db;Username=${POSTGRES_USER:-shop};Password=${POSTGRES_PASSWORD:-shop_password}
+      Payment__Limit: "100000"
+    ports:
+      - "5003:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - shop-net
+
+  order-service:
+    build: ./services/order-service
+    container_name: order-service
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__OrderDb: Host=db;Port=5432;Database=orders_db;Username=${POSTGRES_USER:-shop};Password=${POSTGRES_PASSWORD:-shop_password}
+      Services__CatalogUrl: http://catalog-service:8080
+      Services__PaymentUrl: http://payment-service:8080
+    ports:
+      - "5002:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+      catalog-service:
+        condition: service_started
+      payment-service:
+        condition: service_started
+    networks:
+      - shop-net
+
+networks:
+  shop-net:
+    driver: bridge
+
+volumes:
+  db_data:

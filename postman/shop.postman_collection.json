@@ -1,0 +1,229 @@
+{
+  "info": {
+    "name": "Shop Microservices",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Интернет-магазин: catalog-service, order-service, payment-service"
+  },
+  "variable": [
+    {
+      "key": "catalog",
+      "value": "http://localhost:5001"
+    },
+    {
+      "key": "orders",
+      "value": "http://localhost:5002"
+    },
+    {
+      "key": "payments",
+      "value": "http://localhost:5003"
+    }
+  ],
+  "item": [
+    {
+      "name": "catalog-service",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{catalog}}/health"
+          }
+        },
+        {
+          "name": "Список товаров",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{catalog}}/api/products"
+          }
+        },
+        {
+          "name": "Товар по id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{catalog}}/api/products/1"
+          }
+        },
+        {
+          "name": "Добавить товар",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{catalog}}/api/products",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Клавиатура Type One\",\n  \"price\": 4990,\n  \"stock\": 15\n}"
+            }
+          }
+        },
+        {
+          "name": "Резерв товара",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{catalog}}/api/products/3/reserve",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 1\n}"
+            }
+          }
+        },
+        {
+          "name": "Возврат товара",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{catalog}}/api/products/3/release",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 1\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "order-service",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{orders}}/health"
+          }
+        },
+        {
+          "name": "Оформить заказ (успешная оплата)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{orders}}/api/orders",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerName\": \"Иван Петров\",\n  \"items\": [\n    {\n      \"productId\": 2,\n      \"quantity\": 1\n    },\n    {\n      \"productId\": 3,\n      \"quantity\": 2\n    }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Оформить заказ (оплата отклонена > 100000)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{orders}}/api/orders",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerName\": \"Анна Смирнова\",\n  \"items\": [\n    {\n      \"productId\": 1,\n      \"quantity\": 2\n    }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Оформить заказ (нет на складе)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{orders}}/api/orders",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerName\": \"Олег\",\n  \"items\": [\n    {\n      \"productId\": 4,\n      \"quantity\": 100\n    }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Список заказов",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{orders}}/api/orders"
+          }
+        },
+        {
+          "name": "Заказ по id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{orders}}/api/orders/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "payment-service",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{payments}}/health"
+          }
+        },
+        {
+          "name": "Список платежей",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{payments}}/api/payments"
+          }
+        },
+        {
+          "name": "Платежи по заказу",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{payments}}/api/payments?orderId=1"
+          }
+        },
+        {
+          "name": "Провести платёж напрямую",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{payments}}/api/payments",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": 99,\n  \"amount\": 1500\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

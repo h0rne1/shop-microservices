@@ -1,0 +1,63 @@
+# Проверка сохранения данных в PostgreSQL (volume db_data) после перезапуска
+
+$ docker volume ls | grep db_data
+local     shop_db_data
+
+$ docker compose down        # контейнеры удаляются, volume остаётся
+ Container order-service Stopping 
+ Container order-service Stopped 
+ Container order-service Removing 
+ Container order-service Removed 
+ Container catalog-service Stopping 
+ Container payment-service Stopping 
+ Container catalog-service Stopped 
+ Container catalog-service Removing 
+ Container catalog-service Removed 
+ Container payment-service Stopped 
+ Container payment-service Removing 
+ Container payment-service Removed 
+ Container shop-db Stopping 
+ Container shop-db Stopped 
+ Container shop-db Removing 
+ Container shop-db Removed 
+ Network shop_shop-net Removing 
+ Network shop_shop-net Removed 
+
+$ docker compose up -d
+ Container shop-db Started 
+ Container shop-db Healthy 
+ Container shop-db Healthy 
+ Container payment-service Started 
+ Container catalog-service Started 
+ Container shop-db Healthy 
+ Container order-service Started 
+
+$ curl -s http://localhost:5002/api/orders   # заказы на месте
+[{"id":1,"customerName":"Иван Петров","status":"Paid","total":54970.00,"paymentId":1,"comment":null,"createdAt":"2026-11-10T13:09:18.785683Z","items":[{"id":1,"orderId":1,"productId":2,"productName":"Смартфон Nova X","unitPrice":39990.00,"quantity":1},{"id":2,"orderId":1,"productId":3,"productName":"Наушники Pulse","unitPrice":7490.00,"quantity":2}]},{"id":2,"customerName":"Анна Смирнова","status":"PaymentFailed","total":179980.00,"paymentId":2,"comment":"Amount exceeds limit 100000","createdAt":"2026-11-10T13:09:19.125642Z","items":[{"id":3,"orderId":2,"productId":1,"productName":"Ноутбук Aero 14","unitPrice":89990.00,"quantity":2}]},{"id":3,"customerName":"Олег","status":"Rejected","total":0.00,"paymentId":null,"comment":"Not enough stock for product 4: available 7, requested 100","createdAt":"2026-11-10T13:09:19.17077Z","items":[]}]
+
+$ curl -s http://localhost:5001/api/products  # остатки и добавленный товар сохранились
+[{"id":1,"name":"Ноутбук Aero 14","price":89990.00,"stock":5},{"id":2,"name":"Смартфон Nova X","price":39990.00,"stock":9},{"id":3,"name":"Наушники Pulse","price":7490.00,"stock":23},{"id":4,"name":"Монитор View 27","price":24990.00,"stock":7},{"id":5,"name":"Клавиатура Type One","price":4990.00,"stock":15}]
+
+$ docker compose exec db psql -U shop -d orders_db -c "SELECT id, customer_name, status, total FROM orders;"
+ id | customer_name |    status     |   total   
+----+---------------+---------------+-----------
+  1 | Иван Петров   | Paid          |  54970.00
+  2 | Анна Смирнова | PaymentFailed | 179980.00
+  3 | Олег          | Rejected      |      0.00
+(3 rows)
+
+$ docker compose exec db psql -U shop -d payments_db -c "SELECT id, order_id, amount, status FROM payments;"
+ id | order_id |  amount   |  status  
+----+----------+-----------+----------
+  1 |        1 |  54970.00 | Approved
+  2 |        2 | 179980.00 | Declined
+(2 rows)
+
+$ docker compose exec db psql -U shop -d postgres -c "SELECT datname FROM pg_database WHERE datname LIKE '%_db';"  # базы сервисов
+   datname   
+-------------
+ catalog_db
+ orders_db
+ payments_db
+(3 rows)
+

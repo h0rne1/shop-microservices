@@ -1,0 +1,193 @@
+<!doctype html><html><head><meta charset="utf-8"><title>C4 — Интернет-магазин</title>
+<style>
+  html, body { margin: 0; background: #fff; }
+  .page { width: 1100px; break-after: page; }
+  .page svg { display: block; }
+  @page { size: 1100px 1030px; margin: 0; }
+</style></head><body>
+<div class="page"><svg xmlns="http://www.w3.org/2000/svg" width="1100" height="600" viewBox="0 0 1100 600" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#707070"/></marker></defs>
+<rect width="1100" height="600" fill="#FFFFFF"/>
+<text x="20" y="32" font-size="20" font-weight="700" fill="#222">Уровень 1 — System Context: Интернет-магазин</text>
+<circle cx="245.0" cy="96" r="26" fill="#08427B" stroke="#073B6F"/>
+<rect x="130" y="116" width="230" height="94" rx="28" fill="#08427B" stroke="#073B6F"/>
+<text x="245.0" y="143.3" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">Покупатель</text>
+<text x="245.0" y="157.6" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">[Person]</text>
+<text x="245.0" y="179.7" font-size="12" fill="#FFFFFF" text-anchor="middle">Просматривает каталог и оформляет</text>
+<text x="245.0" y="194.7" font-size="12" fill="#FFFFFF" text-anchor="middle">заказы</text>
+<circle cx="855.0" cy="96" r="26" fill="#08427B" stroke="#073B6F"/>
+<rect x="740" y="116" width="230" height="94" rx="28" fill="#08427B" stroke="#073B6F"/>
+<text x="855.0" y="143.3" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">Менеджер магазина</text>
+<text x="855.0" y="157.6" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">[Person]</text>
+<text x="855.0" y="179.7" font-size="12" fill="#FFFFFF" text-anchor="middle">Добавляет товары и следит за</text>
+<text x="855.0" y="194.7" font-size="12" fill="#FFFFFF" text-anchor="middle">остатками</text>
+<rect x="330" y="360" width="440" height="160" rx="10" fill="#1168BD" stroke="#0B4884"/>
+<text x="550.0" y="420.3" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">Интернет-магазин</text>
+<text x="550.0" y="434.6" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">[Software System]</text>
+<text x="550.0" y="456.7" font-size="12" fill="#FFFFFF" text-anchor="middle">Каталог товаров, оформление заказов с резервированием на складе</text>
+<text x="550.0" y="471.7" font-size="12" fill="#FFFFFF" text-anchor="middle">и оплатой</text>
+<line x1="316.2" y1="210.0" x2="468.7" y2="360.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="280.8" y="267.0" width="223.2" height="36" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="392.4" y="282.0" font-size="11.5" fill="#404040" text-anchor="middle">Смотрит каталог, оформляет заказы</text>
+<text x="392.4" y="297.0" font-size="11.5" fill="#404040" text-anchor="middle">[HTTP/JSON]</text>
+<line x1="783.8" y1="210.0" x2="631.3" y2="360.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="605.6" y="267.0" width="204.0" height="36" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="707.6" y="282.0" font-size="11.5" fill="#404040" text-anchor="middle">Управляет товарами и остатками</text>
+<text x="707.6" y="297.0" font-size="11.5" fill="#404040" text-anchor="middle">[HTTP/JSON]</text>
+<rect x="740" y="570" width="14" height="14" fill="#08427B"/><text x="759" y="582" font-size="11" fill="#444">Person</text>
+<rect x="850" y="570" width="14" height="14" fill="#1168BD"/><text x="869" y="582" font-size="11" fill="#444">Software System</text>
+</svg></div>
+<div class="page"><svg xmlns="http://www.w3.org/2000/svg" width="1100" height="880" viewBox="0 0 1100 880" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#707070"/></marker></defs>
+<rect width="1100" height="880" fill="#FFFFFF"/>
+<text x="20" y="32" font-size="20" font-weight="700" fill="#222">Уровень 2 — Container: Интернет-магазин (docker compose)</text>
+<rect x="40" y="270" width="1020" height="560" fill="none" stroke="#666" stroke-dasharray="8 4" stroke-width="1.5"/>
+<text x="52" y="818" font-size="13" font-weight="700" fill="#333">Интернет-магазин [Software System]</text>
+<circle cx="255.0" cy="86" r="26" fill="#08427B" stroke="#073B6F"/>
+<rect x="140" y="106" width="230" height="94" rx="28" fill="#08427B" stroke="#073B6F"/>
+<text x="255.0" y="133.3" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">Покупатель</text>
+<text x="255.0" y="147.6" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">[Person]</text>
+<text x="255.0" y="169.7" font-size="12" fill="#FFFFFF" text-anchor="middle">Просматривает каталог и оформляет</text>
+<text x="255.0" y="184.7" font-size="12" fill="#FFFFFF" text-anchor="middle">заказы</text>
+<circle cx="845.0" cy="86" r="26" fill="#08427B" stroke="#073B6F"/>
+<rect x="730" y="106" width="230" height="94" rx="28" fill="#08427B" stroke="#073B6F"/>
+<text x="845.0" y="133.3" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">Менеджер магазина</text>
+<text x="845.0" y="147.6" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">[Person]</text>
+<text x="845.0" y="169.7" font-size="12" fill="#FFFFFF" text-anchor="middle">Добавляет товары и следит за</text>
+<text x="845.0" y="184.7" font-size="12" fill="#FFFFFF" text-anchor="middle">остатками</text>
+<rect x="80" y="330" width="290" height="150" rx="10" fill="#438DD5" stroke="#3C7FC0"/>
+<text x="225.0" y="378.8" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">order-service</text>
+<text x="225.0" y="393.0" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">[Container: .NET 9, ASP.NET Core Minimal API,</text>
+<text x="225.0" y="406.1" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">:5002]</text>
+<text x="225.0" y="428.2" font-size="12" fill="#FFFFFF" text-anchor="middle">Оформление заказов; оркестрация резерва и</text>
+<text x="225.0" y="443.2" font-size="12" fill="#FFFFFF" text-anchor="middle">оплаты</text>
+<rect x="730" y="330" width="290" height="150" rx="10" fill="#438DD5" stroke="#3C7FC0"/>
+<text x="875.0" y="386.2" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">catalog-service</text>
+<text x="875.0" y="400.5" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">[Container: .NET 9, ASP.NET Core Minimal API,</text>
+<text x="875.0" y="413.6" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">:5001]</text>
+<text x="875.0" y="435.8" font-size="12" fill="#FFFFFF" text-anchor="middle">Каталог товаров, остатки, резерв/возврат</text>
+<rect x="80" y="600" width="290" height="150" rx="10" fill="#438DD5" stroke="#3C7FC0"/>
+<text x="225.0" y="656.2" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">payment-service</text>
+<text x="225.0" y="670.5" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">[Container: .NET 9, ASP.NET Core Minimal API,</text>
+<text x="225.0" y="683.6" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">:5003]</text>
+<text x="225.0" y="705.8" font-size="12" fill="#FFFFFF" text-anchor="middle">Проведение платежей, лимит 100 000</text>
+<path d="M730,612 v126 a145.0,12 0 0 0 290,0 v-126 a145.0,12 0 0 0 -290,0 Z" fill="#438DD5" stroke="#3C7FC0"/>
+<path d="M730,612 a145.0,12 0 0 0 290,0" fill="none" stroke="#3C7FC0"/>
+<text x="875.0" y="674.8" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">PostgreSQL (db)</text>
+<text x="875.0" y="689.1" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">[Container: postgres:16, volume db_data]</text>
+<text x="875.0" y="711.2" font-size="12" fill="#FFFFFF" text-anchor="middle">Базы catalog_db, orders_db, payments_db</text>
+<line x1="247.4" y1="200.0" x2="233.2" y2="330.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="186.3" y="247.0" width="108.0" height="36" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="240.3" y="262.0" font-size="11.5" fill="#404040" text-anchor="middle">Оформляет заказ</text>
+<text x="240.3" y="277.0" font-size="11.5" fill="#404040" text-anchor="middle">[HTTP/JSON]</text>
+<line x1="370.0" y1="181.0" x2="730.0" y2="340.7" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="496.0" y="242.8" width="108.0" height="36" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="550.0" y="257.8" font-size="11.5" fill="#404040" text-anchor="middle">Смотрит каталог</text>
+<text x="550.0" y="272.8" font-size="11.5" fill="#404040" text-anchor="middle">[HTTP/JSON]</text>
+<line x1="852.6" y1="200.0" x2="866.8" y2="330.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="802.5" y="247.0" width="114.4" height="36" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="859.7" y="262.0" font-size="11.5" fill="#404040" text-anchor="middle">Добавляет товары</text>
+<text x="859.7" y="277.0" font-size="11.5" fill="#404040" text-anchor="middle">[HTTP/JSON]</text>
+<line x1="370.0" y1="405.0" x2="730.0" y2="405.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="470.4" y="387.0" width="159.2" height="36" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="550.0" y="402.0" font-size="11.5" fill="#404040" text-anchor="middle">Резерв / возврат товара</text>
+<text x="550.0" y="417.0" font-size="11.5" fill="#404040" text-anchor="middle">[HTTP/JSON]</text>
+<line x1="225.0" y1="480.0" x2="225.0" y2="600.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="177.4" y="522.0" width="95.2" height="36" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="225.0" y="537.0" font-size="11.5" fill="#404040" text-anchor="middle">Оплата заказа</text>
+<text x="225.0" y="552.0" font-size="11.5" fill="#404040" text-anchor="middle">[HTTP/JSON]</text>
+<line x1="875.0" y1="480.0" x2="875.0" y2="600.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="811.4" y="522.0" width="127.2" height="36" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="875.0" y="537.0" font-size="11.5" fill="#404040" text-anchor="middle">catalog_db</text>
+<text x="875.0" y="552.0" font-size="11.5" fill="#404040" text-anchor="middle">[EF Core / Npgsql]</text>
+<line x1="370.0" y1="675.0" x2="730.0" y2="675.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="486.4" y="657.0" width="127.2" height="36" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="550.0" y="672.0" font-size="11.5" fill="#404040" text-anchor="middle">payments_db</text>
+<text x="550.0" y="687.0" font-size="11.5" fill="#404040" text-anchor="middle">[EF Core / Npgsql]</text>
+<line x1="370.0" y1="465.2" x2="730.0" y2="614.8" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="486.4" y="522.0" width="127.2" height="36" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="550.0" y="537.0" font-size="11.5" fill="#404040" text-anchor="middle">orders_db</text>
+<text x="550.0" y="552.0" font-size="11.5" fill="#404040" text-anchor="middle">[EF Core / Npgsql]</text>
+<rect x="740" y="850" width="14" height="14" fill="#08427B"/><text x="759" y="862" font-size="11" fill="#444">Person</text>
+<rect x="850" y="850" width="14" height="14" fill="#438DD5"/><text x="869" y="862" font-size="11" fill="#444">Container</text>
+</svg></div>
+<div class="page"><svg xmlns="http://www.w3.org/2000/svg" width="1100" height="1030" viewBox="0 0 1100 1030" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#707070"/></marker></defs>
+<rect width="1100" height="1030" fill="#FFFFFF"/>
+<text x="20" y="32" font-size="20" font-weight="700" fill="#222">Уровень 3 — Component: order-service</text>
+<rect x="40" y="250" width="1030" height="450" fill="none" stroke="#666" stroke-dasharray="8 4" stroke-width="1.5"/>
+<text x="52" y="688" font-size="13" font-weight="700" fill="#333">order-service [Container]</text>
+<circle cx="185.0" cy="76" r="26" fill="#08427B" stroke="#073B6F"/>
+<rect x="70" y="96" width="230" height="94" rx="28" fill="#08427B" stroke="#073B6F"/>
+<text x="185.0" y="123.3" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">Покупатель</text>
+<text x="185.0" y="137.6" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">[Person]</text>
+<text x="185.0" y="159.7" font-size="12" fill="#FFFFFF" text-anchor="middle">Просматривает каталог и оформляет</text>
+<text x="185.0" y="174.7" font-size="12" fill="#FFFFFF" text-anchor="middle">заказы</text>
+<rect x="70" y="290" width="250" height="130" rx="10" fill="#85BBF0" stroke="#78A8D8"/>
+<text x="195.0" y="336.2" font-size="15" font-weight="700" fill="#000000" text-anchor="middle">Orders API</text>
+<text x="195.0" y="350.5" font-size="10.5" opacity="0.85" fill="#000000" text-anchor="middle">[Component: Minimal API endpoints</text>
+<text x="195.0" y="363.6" font-size="10.5" opacity="0.85" fill="#000000" text-anchor="middle">(Program.cs)]</text>
+<text x="195.0" y="385.8" font-size="12" fill="#000000" text-anchor="middle">POST/GET /api/orders, /health</text>
+<rect x="430" y="290" width="250" height="130" rx="10" fill="#85BBF0" stroke="#78A8D8"/>
+<text x="555.0" y="336.2" font-size="15" font-weight="700" fill="#000000" text-anchor="middle">OrderProcessor</text>
+<text x="555.0" y="350.5" font-size="10.5" opacity="0.85" fill="#000000" text-anchor="middle">[Component: сервис</text>
+<text x="555.0" y="363.6" font-size="10.5" opacity="0.85" fill="#000000" text-anchor="middle">(Services/OrderProcessor.cs)]</text>
+<text x="555.0" y="385.8" font-size="12" fill="#000000" text-anchor="middle">Резерв → оплата → компенсация</text>
+<rect x="70" y="530" width="250" height="130" rx="10" fill="#85BBF0" stroke="#78A8D8"/>
+<text x="195.0" y="582.8" font-size="15" font-weight="700" fill="#000000" text-anchor="middle">OrderDbContext</text>
+<text x="195.0" y="597.1" font-size="10.5" opacity="0.85" fill="#000000" text-anchor="middle">[Component: EF Core DbContext (Data/)]</text>
+<text x="195.0" y="619.2" font-size="12" fill="#000000" text-anchor="middle">Таблицы orders, order_items</text>
+<rect x="430" y="530" width="250" height="130" rx="10" fill="#85BBF0" stroke="#78A8D8"/>
+<text x="555.0" y="582.8" font-size="15" font-weight="700" fill="#000000" text-anchor="middle">CatalogClient</text>
+<text x="555.0" y="597.1" font-size="10.5" opacity="0.85" fill="#000000" text-anchor="middle">[Component: typed HttpClient (Clients/)]</text>
+<text x="555.0" y="619.2" font-size="12" fill="#000000" text-anchor="middle">Вызовы /reserve и /release</text>
+<rect x="790" y="530" width="250" height="130" rx="10" fill="#85BBF0" stroke="#78A8D8"/>
+<text x="915.0" y="582.8" font-size="15" font-weight="700" fill="#000000" text-anchor="middle">PaymentClient</text>
+<text x="915.0" y="597.1" font-size="10.5" opacity="0.85" fill="#000000" text-anchor="middle">[Component: typed HttpClient (Clients/)]</text>
+<text x="915.0" y="619.2" font-size="12" fill="#000000" text-anchor="middle">Вызов POST /api/payments</text>
+<path d="M70,862 v106 a125.0,12 0 0 0 250,0 v-106 a125.0,12 0 0 0 -250,0 Z" fill="#999999" stroke="#8A8A8A"/>
+<path d="M70,862 a125.0,12 0 0 0 250,0" fill="none" stroke="#8A8A8A"/>
+<text x="195.0" y="914.8" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">orders_db</text>
+<text x="195.0" y="929.1" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">[Container: PostgreSQL 16]</text>
+<text x="195.0" y="951.2" font-size="12" fill="#FFFFFF" text-anchor="middle">Заказы и позиции</text>
+<rect x="430" y="850" width="250" height="130" rx="10" fill="#999999" stroke="#8A8A8A"/>
+<text x="555.0" y="902.8" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">catalog-service</text>
+<text x="555.0" y="917.1" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">[Container: .NET 9]</text>
+<text x="555.0" y="939.2" font-size="12" fill="#FFFFFF" text-anchor="middle">Товары и остатки</text>
+<rect x="790" y="850" width="250" height="130" rx="10" fill="#999999" stroke="#8A8A8A"/>
+<text x="915.0" y="902.8" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">payment-service</text>
+<text x="915.0" y="917.1" font-size="10.5" opacity="0.85" fill="#FFFFFF" text-anchor="middle">[Container: .NET 9]</text>
+<text x="915.0" y="939.2" font-size="12" fill="#FFFFFF" text-anchor="middle">Платежи</text>
+<line x1="188.0" y1="190.0" x2="192.2" y2="290.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="132.9" y="222.0" width="114.4" height="36" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="190.1" y="237.0" font-size="11.5" fill="#404040" text-anchor="middle">POST /api/orders</text>
+<text x="190.1" y="252.0" font-size="11.5" fill="#404040" text-anchor="middle">[HTTP/JSON]</text>
+<line x1="320.0" y1="355.0" x2="430.0" y2="355.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="314.6" y="344.5" width="120.8" height="21" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="375.0" y="359.5" font-size="11.5" fill="#404040" text-anchor="middle">PlaceOrderAsync()</text>
+<line x1="195.0" y1="420.0" x2="195.0" y2="530.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="144.2" y="464.5" width="101.6" height="21" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="195.0" y="479.5" font-size="11.5" fill="#404040" text-anchor="middle">Чтение заказов</text>
+<line x1="457.5" y1="420.0" x2="292.5" y2="530.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="321.0" y="464.5" width="108.0" height="21" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="375.0" y="479.5" font-size="11.5" fill="#404040" text-anchor="middle">Сохраняет заказ</text>
+<line x1="555.0" y1="420.0" x2="555.0" y2="530.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="497.8" y="464.5" width="114.4" height="21" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="555.0" y="479.5" font-size="11.5" fill="#404040" text-anchor="middle">Резерв / возврат</text>
+<line x1="652.5" y1="420.0" x2="817.5" y2="530.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="709.8" y="464.5" width="50.4" height="21" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="735.0" y="479.5" font-size="11.5" fill="#404040" text-anchor="middle">Оплата</text>
+<line x1="195.0" y1="660.0" x2="195.0" y2="850.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="150.6" y="744.5" width="88.8" height="21" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="195.0" y="759.5" font-size="11.5" fill="#404040" text-anchor="middle">SQL [Npgsql]</text>
+<line x1="555.0" y1="660.0" x2="555.0" y2="850.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="520.2" y="744.5" width="69.6" height="21" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="555.0" y="759.5" font-size="11.5" fill="#404040" text-anchor="middle">HTTP/JSON</text>
+<line x1="915.0" y1="660.0" x2="915.0" y2="850.0" stroke="#707070" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="880.2" y="744.5" width="69.6" height="21" fill="#FFFFFF" opacity="0.92" rx="3"/>
+<text x="915.0" y="759.5" font-size="11.5" fill="#404040" text-anchor="middle">HTTP/JSON</text>
+<rect x="740" y="1000" width="14" height="14" fill="#08427B"/><text x="759" y="1012" font-size="11" fill="#444">Person</text>
+<rect x="850" y="1000" width="14" height="14" fill="#85BBF0"/><text x="869" y="1012" font-size="11" fill="#444">Component</text>
+<rect x="960" y="1000" width="14" height="14" fill="#999999"/><text x="979" y="1012" font-size="11" fill="#444">Другой контейнер</text>
+</svg></div>
+</body></html>
